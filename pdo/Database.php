@@ -1,4 +1,15 @@
 <?php
-$conn = new PDO("mysql:host=localhost;library", "root", "", array(PDO::ATTR_PERSISTENT => true));
 
-echo "Connection Successful";
+define("DSN", "mysql:host=localhost;library");
+define("USERNAME", "root");
+define("PASSWORD", "");
+
+$options = array(PDO::ATTR_PERSISTENT => true);
+
+try {
+    $conn = new PDO(DSN, USERNAME, PASSWORD, $options);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connection Successful";
+} catch (PDOException $ex) {
+    echo "A database error occurred" . $ex->getMessage();
+}
