@@ -1,6 +1,6 @@
 <?php
 
-define("DSN", "mysql:host=localhost;library");
+define("DSN", "mysql:host=localhost;dbname=library");
 define("USERNAME", "root");
 define("PASSWORD", "");
 
@@ -11,5 +11,5 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connection Successful";
 } catch (PDOException $ex) {
-    echo "A database error occurred" . $ex->getMessage();
+    echo "A database error occurred " . $ex->getMessage();
 }
