@@ -9,7 +9,7 @@ $options = array(PDO::ATTR_PERSISTENT => true);
 try {
     $conn = new PDO(DSN, USERNAME, PASSWORD, $options);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connection Successful";
+    // echo "Connection Successful";
 } catch (PDOException $ex) {
     echo "A database error occurred " . $ex->getMessage();
 }
