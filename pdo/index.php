@@ -6,7 +6,7 @@ include_once 'partials/header.php';
     <section class="col .col-xs-12 .col-sm-6 .col-md-8 col-lg-6 white">
         <h3 class="text-primary">Create a new task </h3>
         <hr>
-        <form action="" method="post">
+        <form id="create-task" action="" method="post">
             <div class="form-group">
                 <label for="name" class="col-md-2 control-label">Name</label>
                 <div class="col-md-10">

@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <!-- Material Design css -->
-    <link rel="stylesheet" href="css/bootstrap-material-design.css">
-    <link rel="stylesheet" href="css/ripples.css">
+    <!-- <link rel="stylesheet" href="../css/bootstrap-material-design.css">
+    <link rel="stylesheet" href="../css/ripples.css"> -->
 
     <!-- Custom css -->
     <link rel="stylesheet" href="css/app.css">

@@ -19,6 +19,7 @@ try {
 }
 */
 
+/*
 try {
     //build the query
     $insertQuery = "INSERT INTO books (name, description, created_at)
@@ -42,4 +43,22 @@ try {
     echo "Record with ID: " . $conn->lastInsertId() . " created";
 } catch (PDOException $ex) {
     echo "An error occurred " . $ex->getMessage();
+}
+*/
+
+if (isset($_POST['name']) && isset($_POST['description'])) {
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+
+    try {
+        $createQuery = "INSERT INTO tasks (name, description, created_at)
+                VALUES (:book_name, :book_description, now())";
+        $statement = $conn->prepare($createQuery);
+        $statement->execute(array(":book_name" => $name, ":book_description" => $description));
+        if ($statement) {
+            echo "Record Inserted";
+        }
+    } catch (PDOException $ex) {
+        echo "An error Occurred" . $ex->getMessage();
+    }
 }
