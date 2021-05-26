@@ -2,11 +2,12 @@
 
 include_once 'Database.php';
 
-$table = "CREATE TABLE IF NOT EXISTS books
+$table = "CREATE TABLE IF NOT EXISTS tasks
 (
     id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(25) NOT NULL UNIQUE,
     description VARCHAR(255) NOT NULL,
+    status VARCHAR(25) DEFAULT 'Not Completed',
     created_at TIMESTAMP 
 )";
 
