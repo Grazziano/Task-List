@@ -51,7 +51,8 @@ try {
             <div class='editable' onClick=\"makeElementEditable(this)\" onblur=\"updateTaskStatus(this, '{$task->id}')\">$task->status</div>
         </td>
         <td>$create_date</td>
-        <td style='width: 5%;'><button><i class='btn-danger fa fa-times'></i></button>
+        <td style='width: 5%;'>
+        <button onClick=\"deleteTask('{$task->id}')\"><i class='btn-danger fa fa-times'></i></button>
         </td>
     </tr>";
 
