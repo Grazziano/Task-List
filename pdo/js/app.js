@@ -5,6 +5,9 @@ $(document).ready(function () {
         var form = $(this);
         var formData = form.serialize();
 
+        $('#name_error').html("");
+        $('#description_error').html("");
+
         // var name = $('#name').val();
         // var description = $('#description').val();
         // console.log(name + " " + description);
@@ -13,9 +16,23 @@ $(document).ready(function () {
             url: 'create.php',
             method: 'POST',
             data: formData,
+            dataType: 'json',
+            encode: true,
             success: function (data) {
-                $('#ajax_msg').css("display", "block").delay(3000).slideUp(300).html(data);
-                document.getElementById("create-task").reset();
+
+                if (data.success == false) {
+                    if (data.message.name !== "") {
+                        //display error
+                        $('#name_error').css("display", "block").html(data.message.name);
+                    }
+                    if (data.message.description !== "") {
+                        //display error
+                        $('#description_error').css("display", "block").html(data.message.description);
+                    }
+                } else {
+                    $('#ajax_msg').css("display", "block").delay(3000).slideUp(300).html(data.message);
+                    document.getElementById("create-task").reset();
+                }
             }
         });
     });

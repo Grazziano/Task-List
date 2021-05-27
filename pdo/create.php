@@ -46,19 +46,39 @@ try {
 }
 */
 
+$form_errors = [];
+$data = [];
+
 if (isset($_POST['name']) && isset($_POST['description'])) {
     $name = $_POST['name'];
     $description = $_POST['description'];
 
-    try {
-        $createQuery = "INSERT INTO tasks (name, description, created_at)
-                VALUES (:book_name, :book_description, now())";
-        $statement = $conn->prepare($createQuery);
-        $statement->execute(array(":book_name" => $name, ":book_description" => $description));
-        if ($statement) {
-            echo "Record Inserted";
-        }
-    } catch (PDOException $ex) {
-        echo "An error Occurred" . $ex->getMessage();
+    if (!$name || $name == null) {
+        $form_errors['name'] = "Task name is required";
     }
+
+    if (!$description || $description == null) {
+        $form_errors['description'] = "Task description is required";
+    }
+
+    if (count($form_errors) < 1) {
+        try {
+            $createQuery = "INSERT INTO tasks (name, description, created_at)
+                    VALUES (:book_name, :book_description, now())";
+            $statement = $conn->prepare($createQuery);
+            $statement->execute(array(":book_name" => $name, ":book_description" => $description));
+            if ($statement) {
+                // echo "Record Inserted";
+                $data['success'] = true;
+                $data['message'] = "Record Inserted";
+            }
+        } catch (PDOException $ex) {
+            echo "An error Occurred" . $ex->getMessage();
+        }
+    } else {
+        // process error message
+        $data['success'] = false;
+        $data['message'] = $form_errors;
+    }
+    echo json_encode($data);
 }
