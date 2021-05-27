@@ -131,7 +131,8 @@ function deleteTask(taskId) {
             }
         });
 
-        $('#task-list').load('read.php');
+        // $('#task-list').load('read.php');
+        window.location.replace('tasks.php?p=1');
     }
     return false;
 }

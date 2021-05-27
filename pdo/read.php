@@ -1,7 +1,11 @@
 <?php
 
+use voku\helper\Paginator;
+
+require __DIR__ . '/vendor/autoload.php';
+
 include_once 'Database.php';
-include_once 'Book.php';
+// include_once 'Book.php';
 
 $selectQuery = "SELECT * FROM books";
 
@@ -35,29 +39,35 @@ try {
     //     echo "Name: " . $row->name . " - " . $row->description . "<br>";
     //     var_dump($row);
     // }
+
+    $paginate = new Paginator(2, 'p');
     $readQuery = "SELECT * FROM tasks";
     $statement = $conn->query($readQuery);
+    $total = $statement->rowCount();
+    $paginate->set_total($total);
 
-    while ($task = $statement->fetch(PDO::FETCH_OBJ)) {
-        $create_date = strftime("%b %d %Y", strtotime($task->created_at));
-        $output = "<tr>
-        <td title='Click to edit'>
-            <div class='editable' onClick=\"makeElementEditable(this)\" onblur=\"updateTask(this, '{$task->id}', 'name')\">$task->name</div>
-        </td>
-        <td title='Click to edit'>
-            <div class='editable' onClick=\"makeElementEditable(this)\" onblur=\"updateTask(this, '{$task->id}', 'description')\"> $task->description </div>
-        </td>
-        <td title='Click to edit'>
-            <div class='editable' onClick=\"makeElementEditable(this)\" onblur=\"updateTask(this, '{$task->id}', 'status')\">$task->status</div>
-        </td>
-        <td>$create_date</td>
-        <td style='width: 5%;'>
-        <button onClick=\"deleteTask('{$task->id}')\"><i class='btn-danger fa fa-times'></i></button>
-        </td>
-    </tr>";
+    $tasks = $conn->query("SELECT * FROM tasks" . $paginate->get_limit());
 
-        echo $output;
-    }
+    // while ($task = $statement->fetch(PDO::FETCH_OBJ)) {
+    //     $create_date = strftime("%b %d %Y", strtotime($task->created_at));
+    //     $output = "<tr>
+    //     <td title='Click to edit'>
+    //         <div class='editable' onClick=\"makeElementEditable(this)\" onblur=\"updateTask(this, '{$task->id}', 'name')\">$task->name</div>
+    //     </td>
+    //     <td title='Click to edit'>
+    //         <div class='editable' onClick=\"makeElementEditable(this)\" onblur=\"updateTask(this, '{$task->id}', 'description')\"> $task->description </div>
+    //     </td>
+    //     <td title='Click to edit'>
+    //         <div class='editable' onClick=\"makeElementEditable(this)\" onblur=\"updateTask(this, '{$task->id}', 'status')\">$task->status</div>
+    //     </td>
+    //     <td>$create_date</td>
+    //     <td style='width: 5%;'>
+    //     <button onClick=\"deleteTask('{$task->id}')\"><i class='btn-danger fa fa-times'></i></button>
+    //     </td>
+    // </tr>";
+
+    //     echo $output;
+    // }
 } catch (PDOException $ex) {
     echo "An error occurred " . $ex->getMessage();
 }
