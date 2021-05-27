@@ -17,21 +17,7 @@ include_once 'partials/header.php';
                 </tr>
             </thead>
 
-            <tbody id="task-list">
-                <tr>
-                    <td>
-                        <div>the task name</div>
-                    </td>
-                    <td>
-                        <div> The task description </div>
-                    </td>
-                    <td>
-                        <div>task status</div>
-                    </td>
-                    <td>date added</td>
-                    <td style="width: 5%;"><button><i class="btn-danger fa fa-times"></i></button>
-                    </td>
-                </tr>
+            <tbody id="task-list">                
             </tbody>
         </table>
     </section>

@@ -6,7 +6,7 @@ include_once 'Book.php';
 $selectQuery = "SELECT * FROM books";
 
 try {
-    $statement = $conn->query($selectQuery);
+    // $statement = $conn->query($selectQuery);
 
     // while ($row = $statement->fetch()) {
     //     echo "Name: " . $row['name'] . " - " . $row['description'] . "<br>";
@@ -29,11 +29,33 @@ try {
     //     var_dump($row);
     // }
 
-    $statement->setFetchMode(PDO::FETCH_CLASS, "Book");
+    // $statement->setFetchMode(PDO::FETCH_CLASS, "Book");
 
-    while ($row = $statement->fetch()) {
-        echo "Name: " . $row->name . " - " . $row->description . "<br>";
-        var_dump($row);
+    // while ($row = $statement->fetch()) {
+    //     echo "Name: " . $row->name . " - " . $row->description . "<br>";
+    //     var_dump($row);
+    // }
+    $readQuery = "SELECT * FROM tasks";
+    $statement = $conn->query($readQuery);
+
+    while ($task = $statement->fetch(PDO::FETCH_OBJ)) {
+        $create_date = strftime("%b %d %Y", strtotime($task->created_at));
+        $output = "<tr>
+        <td>
+            <div>$task->name</div>
+        </td>
+        <td>
+            <div> $task->description </div>
+        </td>
+        <td>
+            <div>$task->status</div>
+        </td>
+        <td>$create_date</td>
+        <td style='width: 5%;'><button><i class='btn-danger fa fa-times'></i></button>
+        </td>
+    </tr>";
+
+        echo $output;
     }
 } catch (PDOException $ex) {
     echo "An error occurred " . $ex->getMessage();
