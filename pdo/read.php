@@ -42,13 +42,13 @@ try {
         $create_date = strftime("%b %d %Y", strtotime($task->created_at));
         $output = "<tr>
         <td title='Click to edit'>
-            <div class='editable' onClick=\"makeElementEditable(this)\" onblur=\"updateTaskName(this, '{$task->id}')\">$task->name</div>
+            <div class='editable' onClick=\"makeElementEditable(this)\" onblur=\"updateTask(this, '{$task->id}', 'name')\">$task->name</div>
         </td>
         <td title='Click to edit'>
-            <div class='editable' onClick=\"makeElementEditable(this)\" onblur=\"updateTaskDescription(this, '{$task->id}')\"> $task->description </div>
+            <div class='editable' onClick=\"makeElementEditable(this)\" onblur=\"updateTask(this, '{$task->id}', 'description')\"> $task->description </div>
         </td>
         <td title='Click to edit'>
-            <div class='editable' onClick=\"makeElementEditable(this)\" onblur=\"updateTaskStatus(this, '{$task->id}')\">$task->status</div>
+            <div class='editable' onClick=\"makeElementEditable(this)\" onblur=\"updateTask(this, '{$task->id}', 'status')\">$task->status</div>
         </td>
         <td>$create_date</td>
         <td style='width: 5%;'>

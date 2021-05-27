@@ -32,25 +32,31 @@ try {
 }
 */
 
-if (isset($_POST['name']) && isset($_POST['id'])) {
-    $name = trim($_POST['name']);
+// if (isset($_POST['name']) && isset($_POST['id'])) {
+if (isset($_POST['id'])) {
+    // $name = trim($_POST['name']);
+    $column = trim($_POST['column']);
+    $theData = trim($_POST['theData']);
     $id = $_POST['id'];
 
     try {
-        $updateQuery = "UPDATE tasks SET name = :task_name WHERE id = :id";
+        // $updateQuery = "UPDATE tasks SET name = :task_name WHERE id = :id";
+        $updateQuery = "UPDATE tasks SET {$column} = :placeholder WHERE id = :id";
 
         $statement = $conn->prepare($updateQuery);
-        $statement->execute(array(":task_name" => $name, ":id" => $id));
+        // $statement->execute(array(":task_name" => $name, ":id" => $id));
+        $statement->execute(array(":placeholder" => $theData, ":id" => $id));
 
         if ($statement->rowCount() === 1) {
-            echo "Task Name update successfully";
+            // echo "Task Name update successfully";
+            echo "Task {$column} update successfully";
         } else {
             echo "No changes made";
         }
     } catch (PDOException $ex) {
         echo "An error Occurred" . $ex->getMessage();
     }
-} else if (isset($_POST['description']) && isset($_POST['id'])) {
+} /*else if (isset($_POST['description']) && isset($_POST['id'])) {
     $description = trim($_POST['description']);
     $id = $_POST['id'];
 
@@ -87,3 +93,4 @@ if (isset($_POST['name']) && isset($_POST['id'])) {
         echo "An error Occurred" . $ex->getMessage();
     }
 }
+*/
