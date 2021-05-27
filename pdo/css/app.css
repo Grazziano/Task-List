@@ -11,3 +11,12 @@
     text-align: center;
     display: none;
 }
+
+.editable {
+    cursor: pointer;
+}
+
+.editable:hover {
+    background-color: lightyellow;
+    background-size: 100%;
+}
